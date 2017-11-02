@@ -12,12 +12,12 @@ using namespace ::apache::thrift::server;
 using namespace std;
 using boost::shared_ptr;
 
-using namespace  ::test::thrift;
+using namespace  ::myrpc::thrift;
 
 int main(){
-        shared_ptr<TSocket> socket(new TSocket("localhost", 9090));
-        shared_ptr<TTransport> transport(new TBufferedTransport(socket));
-        shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
+        boost::shared_ptr<TSocket> socket(new TSocket("localhost", 9090));
+        boost::shared_ptr<TTransport> transport(new TBufferedTransport(socket));
+        boost::shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
 
         HeapSortClient  client(protocol);
         transport->open();
@@ -35,7 +35,7 @@ int main(){
         }
         vector<int32_t> returnA(A);
         client.HeapSort( returnA, A, A.size() );
-        for( int i = A.capacity(); i >= 0; i-- ) 
+        for( int i = A.size() - 1; i >= 0; i-- ) 
             cout << returnA.at(i) << endl;
 
         transport->close();

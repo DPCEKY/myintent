@@ -15,8 +15,7 @@ using namespace ::apache::thrift::transport;
 using namespace ::apache::thrift::server;
 
 using boost::shared_ptr;
-using namespace std;
-using namespace  ::tutorial;
+using namespace  ::myrpc::thrift;
 
 class HeapSortHandler : virtual public HeapSortIf {
  public:
@@ -24,6 +23,27 @@ class HeapSortHandler : virtual public HeapSortIf {
     // Your initialization goes here
   }
 
+  void HeapSort(std::vector<int32_t> & _return, const std::vector<int32_t> & A, const int32_t N) {
+    _return = A;
+    
+    //Build Heap
+    int i = N / 2;
+    int TMP = 0;
+    for( i = N / 2; i >= 0; i-- )
+        PercolateDown( _return, i, N );
+    for( i = N - 1; i >= 0; i-- )
+    {
+        TMP = _return.at(0);
+        _return.at(0) = _return.at(i);
+        _return.at(i) = TMP;
+        PercolateDown( _return, 0, i );
+        
+    }
+    
+  }
+
+
+private:
   void PercolateDown( std::vector<int32_t> & A, int i, int N ){
     if( LeftChild( i ) >= N )
         return;
@@ -43,26 +63,7 @@ class HeapSortHandler : virtual public HeapSortIf {
     }
     if( A.at(i) > tmp )
         A.at(i) = tmp;
-
   }
-
-  void HeapSort(std::vector<int32_t> & _return, std::vector<int32_t> & A, const int32_t N) {
-    //Build Heap
-    int i = N / 2;
-    int TMP = 0;
-    for( i = N / 2; i >= 0; i-- )
-        PercolateDown( A, i, N );
-    for( i = N - 1; i >= 0; i-- )
-    {
-        TMP = A.at(0);
-        A.at(0) = A.at(i);
-        A.at(i) = TMP;
-        PercolateDown( A, 0, i );
-        
-    }
-    _return = A;
-  }
-
 };
 
 int main(int argc, char **argv) {
