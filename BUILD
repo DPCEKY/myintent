@@ -7,10 +7,9 @@ cc_library(
         "myrpc_types.h","myrpc_constants.h","HeapSort.h"
     ],
     copts = [
-        "-I/usr/local/include/thrift",
         "-I/usr/local/include/boost",
     ],
-    linkopts = ["-lthrift"],
+    linkopts = ["-L/usr/local/lib","-lthrift"],
 )
 
 cc_binary(
@@ -19,11 +18,10 @@ cc_binary(
         "server.cpp"
     ],
     copts = [
-        "-I/usr/local/include/thrift",
         "-I/usr/local/include/boost",
     ],
     deps = [":mylib"],
-    linkopts = ["-lthrift"],
+    linkopts = ["-L/usr/local/lib","-lthrift"],
 )
 
 cc_binary(
@@ -32,9 +30,8 @@ cc_binary(
         "client.cpp"
     ],
     copts = [
-        "-I/usr/local/include/thrift",
         "-I/usr/local/include/boost",
     ],
     deps = [":mylib"],
-    linkopts = ["-lthrift"],
+    linkopts = ["-L/usr/local/lib","-lthrift"],
 )
