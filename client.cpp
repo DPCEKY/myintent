@@ -11,7 +11,7 @@ using namespace ::apache::thrift::transport;
 using namespace ::apache::thrift::server;
 using namespace std;
 using boost::shared_ptr;
-// I am zui shuai de 
+
 using namespace  ::myrpc::thrift;
 
 int main(){
