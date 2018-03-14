@@ -14,7 +14,7 @@ using namespace ::apache::thrift::protocol;
 using namespace ::apache::thrift::transport;
 using namespace ::apache::thrift::server;
 
-using boost::shared_ptr;
+//using boost::shared_ptr;
 using namespace  ::myrpc::thrift;
 
 class HeapSortHandler : virtual public HeapSortIf {
@@ -68,11 +68,11 @@ private:
 
 int main(int argc, char **argv) {
   int port = 9090;
-  shared_ptr<HeapSortHandler> handler(new HeapSortHandler());
-  shared_ptr<TProcessor> processor(new HeapSortProcessor(handler));
-  shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
-  shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-  shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+  std::shared_ptr<HeapSortHandler> handler(new HeapSortHandler());
+  std::shared_ptr<TProcessor> processor(new HeapSortProcessor(handler));
+  std::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
+  std::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+  std::shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
 
   TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
   server.serve();
