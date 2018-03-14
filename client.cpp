@@ -10,14 +10,14 @@ using namespace ::apache::thrift::protocol;
 using namespace ::apache::thrift::transport;
 using namespace ::apache::thrift::server;
 using namespace std;
-using boost::shared_ptr;
+//using boost::shared_ptr;
 
 using namespace  ::myrpc::thrift;
 
 int main(){
-        boost::shared_ptr<TSocket> socket(new TSocket("localhost", 9090));
-        boost::shared_ptr<TTransport> transport(new TBufferedTransport(socket));
-        boost::shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
+        std::shared_ptr<TSocket> socket(new TSocket("localhost", 9090));
+        std::shared_ptr<TTransport> transport(new TBufferedTransport(socket));
+        std::shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
 
         HeapSortClient  client(protocol);
         transport->open();
